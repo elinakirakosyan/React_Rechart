@@ -1,26 +1,39 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Container } from './components/LeftSide/Container';
+import { Card } from './components/RightSide/Card';
+import CardInfoArray from './components/RightSide/Info';
+import {useStyles} from './components/RightSide/MainStyles';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+const App: React.FC = () => {
+  const classes: any = useStyles();
+
+  return ( 
+    <>
+      <div className={classes.wrapper}>
+        <div className={classes.mainHeader}>
+              <div className={classes.title1}> Кошельки платформы </div>
+              <div className={classes.title2}> Кошельки приложения</div>
+            </div>
+            <div className={classes.main}>
+              <div className={classes.leftside}>
+              <Container title="USDT Баланс"
+                money={240000}
+                todaysForecast="Сегодня:"
+                replenishBtn="+ Пополнить"
+                withdrawBtn="Вывести"
+              />
+              </div> 
+              <div className={classes.rightside}>
+              {CardInfoArray.map((elem) => 
+                <Card header={elem.header} logo={elem.logo} title={elem.title} count={elem.count} money={elem.money} btn={elem.btn} key={Math.random()}/> 
+              )}
+            </div>
+        </div>
+      </div>
+    </>
+    
+  )
 }
 
 export default App;
